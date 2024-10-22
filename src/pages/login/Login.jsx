@@ -61,7 +61,7 @@ const Login = () => {
       <p className="intro-text">
         Para continuar, inicia sesion con Google:
       </p>
-      <button onClick={handleLogin} className="button-login">Login</button>
+      <button onClick={handleLogin} className="button-login">Iniciar sesión</button>
     </div>
   );
 };
