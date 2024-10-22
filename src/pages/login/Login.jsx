@@ -57,8 +57,9 @@ const Login = () => {
   return (
     <div className="container-login">
       <h1 className="title-login">SKYSHIELD</h1>
+      <h4 className="subtitle-login">Visualizando el aire que respiramos</h4>
       <p className="intro-text">
-        Para visualizar e informarte sobre los problemas ambientales que presenta nuestro aire, inicia sesión con Google:
+        Para continuar, iniciar sesion con Google:
       </p>
       <button onClick={handleLogin} className="button-login">Login</button>
     </div>
