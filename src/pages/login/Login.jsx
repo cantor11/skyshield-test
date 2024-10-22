@@ -57,9 +57,9 @@ const Login = () => {
   return (
     <div className="container-login">
       <h1 className="title-login">SKYSHIELD</h1>
-      <h2 className="subtitle-login">Visualizando el aire que respiramos</h2>
+      <h3 className="subtitle-login">Visualizando el aire que respiramos</h3>
       <p className="intro-text">
-        Para continuar, iniciar sesion con Google:
+        Para continuar, inicia sesion con Google:
       </p>
       <button onClick={handleLogin} className="button-login">Login</button>
     </div>
