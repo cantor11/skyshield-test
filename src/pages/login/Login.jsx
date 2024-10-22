@@ -57,7 +57,7 @@ const Login = () => {
   return (
     <div className="container-login">
       <h1 className="title-login">SKYSHIELD</h1>
-      <h4 className="subtitle-login">Visualizando el aire que respiramos</h4>
+      <h2 className="subtitle-login">Visualizando el aire que respiramos</h2>
       <p className="intro-text">
         Para continuar, iniciar sesion con Google:
       </p>
