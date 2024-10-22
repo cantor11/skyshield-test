@@ -48,11 +48,6 @@ const Login = () => {
     loginGoogleWithPopUp();  // Start login process with Google
   }, [loginGoogleWithPopUp]);
 
-  // Callback to handle logout
-  const handleLogout = useCallback(() => {
-    logout();
-  }, [logout]);
-
   // Display loading text while fetching authentication state
   if (loading) {
     return <p className="loading-text">Loading...</p>;  
