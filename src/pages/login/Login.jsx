@@ -48,20 +48,19 @@ const Login = () => {
     loginGoogleWithPopUp();  // Start login process with Google
   }, [loginGoogleWithPopUp]);
 
-  // Callback to handle logout
-  const handleLogout = useCallback(() => {
-    logout();
-  }, [logout]);
-
   // Display loading text while fetching authentication state
   if (loading) {
-    return <p className="loading-text">Loading...</p>;  
+    return <p className="loading-text">Cargando...</p>;  
   }
 
-  // Render the login button
+  // Render the login interface
   return (
     <div className="container-login">
-      <button onClick={handleLogin}>Log In</button>
+      <h1 className="title-login">SKYSHIELD</h1>
+      <p className="intro-text">
+        Para visualizar e informarte sobre los problemas ambientales que presenta nuestro aire, inicia sesión con Google:
+      </p>
+      <button onClick={handleLogin} className="button-login">Login</button>
     </div>
   );
 };
