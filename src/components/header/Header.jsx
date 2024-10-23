@@ -1,5 +1,7 @@
 import "./Header.css";
 import { Link } from "react-router-dom";
+import { useCallback } from "react";
+import useAuthStore from "../../stores/use-auth-store";
 
 /**
  * Header Component
@@ -12,6 +14,12 @@ import { Link } from "react-router-dom";
  */
 
 const Header = () => {
+  const { user, logout } = useAuthStore();
+
+  const handleLogout = useCallback(() => {
+    logout();
+  }, [logout]);
+
   return (
     <header>
       <div className="left-section">
@@ -38,9 +46,17 @@ const Header = () => {
       </nav>
 
       <div className="right-section">
-        <Link to="/login">
-          <img src="/images/logout.webp" alt="logout" className="logout" />
-        </Link>
+        {user ? (
+          // Mostrar el botón de logout si el usuario está autenticado
+          <button onClick={handleLogout} className="button-logout">
+            <img src="/images/logout.webp" alt="Logout" className="logout" />
+          </button>
+        ) : (
+          // Mostrar el botón de login si el usuario no está autenticado
+          <Link to="/login">
+            <img src="/images/logout.webp" alt="Login" className="login" />
+          </Link>
+        )}
       </div>
     </header>
   );
