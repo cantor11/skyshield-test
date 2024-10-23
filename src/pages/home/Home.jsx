@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import Controls from "./controls/Controls";
 import Lights from "./lights/Lights";
-import Header from "../../components/header/Header";
+import Header from "./../components/header/Header";
 import { Loader } from "@react-three/drei";
 import { Suspense } from "react";
 //import { Perf } from "r3f-perf"; //performance stats
