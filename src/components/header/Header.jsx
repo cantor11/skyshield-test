@@ -38,7 +38,7 @@ const Header = () => {
       </nav>
 
       <div className="right-section">
-        <Link to="/about">
+        <Link to="/login">
           <img src="/images/logout.webp" alt="logout" className="logout" />
         </Link>
       </div>
