@@ -11,9 +11,16 @@
     margin: 0;       
 }
 
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
 .loading-text {
     font-size: medium;
-    color: #666;
+    color: #9d9d9d;
     text-align: center;
 }
 
