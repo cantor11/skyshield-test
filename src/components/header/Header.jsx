@@ -1,5 +1,5 @@
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import useAuthStore from "../../stores/use-auth-store";
 
@@ -15,9 +15,11 @@ import useAuthStore from "../../stores/use-auth-store";
 
 const Header = () => {
   const { user, logout } = useAuthStore();
+  const navigate = useNavigate();
 
   const handleLogout = useCallback(() => {
     logout();
+    navigate("/login");
   }, [logout]);
 
   return (
