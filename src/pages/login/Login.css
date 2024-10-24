@@ -11,17 +11,11 @@
     margin: 0;       
 }
 
-.loading-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; 
-  }
-  
-  .loading-text {
+.loading-text {
     font-size: medium;
     color: #666;
-  }
+    text-align: center;
+}
 
 .title-login {
     font-size: 3em;
@@ -40,5 +34,9 @@
     margin-top: 10px; 
     margin-bottom: 15px;
     color: #ddd; 
+}
+
+.button-login{
+    width: 200px;
 }
 

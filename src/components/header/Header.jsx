@@ -47,12 +47,12 @@ const Header = () => {
 
       <div className="right-section">
         {user ? (
-          // Mostrar el botón de logout si el usuario está autenticado
+
           <button onClick={handleLogout} className="button-logout">
             <img src="/images/logout.webp" alt="Logout" className="logout" />
           </button>
         ) : (
-          // Mostrar el botón de login si el usuario no está autenticado
+
           <Link to="/login">
             <img src="/images/logout.webp" alt="Login" className="login" />
           </Link>
