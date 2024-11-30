@@ -2,6 +2,7 @@ import "./Header.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import useAuthStore from "../../stores/use-auth-store";
+import { NavLink } from "react-router-dom";
 
 /**
  * Header Component
@@ -29,36 +30,53 @@ const Header = () => {
           <img src="/images/logo.webp" alt="Inicio" className="logo-image" />
         </Link>
       </div>
-
       <nav>
         <ul>
           <li>
-            <Link to="/quiz" className="button-link">Quiz</Link>
+            <NavLink
+              to="/efecto-invernadero"
+              className={({ isActive }) => isActive ? "button-link active" : "button-link"}
+            >
+              Efecto invernadero
+            </NavLink>
           </li>
           <li>
-            <Link to="/efecto-invernadero">Efecto invernadero</Link>
+            <NavLink
+              to="/smog"
+              className={({ isActive }) => isActive ? "button-link active" : "button-link"}
+            >
+              Smog
+            </NavLink>
           </li>
           <li>
-            <Link to="/smog">Smog</Link>
+            <NavLink
+              to="/capa-ozono"
+              className={({ isActive }) => isActive ? "button-link active" : "button-link"}
+            >
+              Capa de ozono
+            </NavLink>
           </li>
           <li>
-            <Link to="/agotamiento-capa-ozono">Agotamiento de la capa de ozono</Link>
+            <NavLink
+              to="/quiz"
+              className={({ isActive }) => isActive ? "button-link active" : "button-link"}
+            >
+              Quiz
+            </NavLink>
           </li>
         </ul>
       </nav>
-
       <div className="right-section">
         {user ? (
-
           <button onClick={handleLogout} className="button-logout">
             <img src="/images/logout.webp" alt="Logout" className="logout" />
           </button>
         ) : (
-
           <Link to="/login">
             <img src="/images/logout.webp" alt="Login" className="login" />
           </Link>
         )}
+
       </div>
     </header>
   );
