@@ -11,6 +11,7 @@ on:
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
+    environment: ci
 
     steps:
       # 1. Descargar el código fuente
@@ -44,13 +45,6 @@ jobs:
       # 6. Ejecutar SonarCloud Scan
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
-        with:
-          args: >
-            -Dsonar.projectKey=cantor11_skyshield-test
-            -Dsonar.organization=cantor11
-            -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.sources=./src
-            -Dsonar.exclusions=**/node_modules/**,**/dist/**
-            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
         env:
           SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONARCLOUD_HOST_URL }}
