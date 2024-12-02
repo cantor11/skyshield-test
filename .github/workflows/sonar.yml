@@ -11,7 +11,7 @@ on:
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
-
+    environment: ci
     steps:
       # 1. Descargar el código fuente
       - name: Checkout code
