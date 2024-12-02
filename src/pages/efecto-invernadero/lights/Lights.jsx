@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useRef } from "react";
 import { Object3D } from "three";
 //import { useHelper } from "@react-three/drei";
