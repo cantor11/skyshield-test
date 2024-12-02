@@ -38,8 +38,16 @@ jobs:
       - name: Run Jest with coverage
         run: npx jest --coverage # Genera el archivo coverage/lcov.info.
 
-      # 6. Ejecutar Sonar Scanner
+      # 6. Instalar sonar-scanner (si no usas la acción oficial de SonarCloud)
+      - name: Install SonarScanner
+        run: |
+          sudo apt-get install -y unzip
+          curl -L https://github.com/SonarSource/sonar-scanner-cli/releases/download/4.6.2.2472/sonar-scanner-4.6.2.2472-linux.zip -o sonar-scanner.zip
+          unzip sonar-scanner.zip
+          sudo mv sonar-scanner-4.6.2.2472-linux /opt/sonar-scanner
+          sudo ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/bin/sonar-scanner
 
+      # 7. Ejecutar Sonar Scanner
       - name: Run Sonar Scanner
         env:
           SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }} # Asegúrate de configurar este secreto en GitHub.
