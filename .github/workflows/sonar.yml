@@ -11,6 +11,7 @@ on:
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
+    environment: ci
 
     steps:
       # 1. Descargar el código fuente
@@ -23,31 +24,29 @@ jobs:
         with:
           node-version: 18 # Asegura que se use la versión adecuada de Node.js.
 
-      # 3. Configurar Java
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11' # Sonar Scanner requiere Java.
-
-      # 4. Instalar dependencias del proyecto
+      # 3. Instalar dependencias del proyecto
       - name: Install dependencies
-        run: npm install
+        run: npm ci # Usa 'npm ci' para instalaciones más confiables en CI/CD.
 
-      # 5. Generar reporte de cobertura con Jest
-      - name: Run Jest with coverage
-        run: npx jest --coverage # Genera el archivo coverage/lcov.info.
-
-      # 6. Ejecutar Sonar Scanner
-
-      - name: Run Sonar Scanner
-        env:
-          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }} # Asegúrate de configurar este secreto en GitHub.
+      # 4. Generar reporte de cobertura con Jest
+      - name: Run tests with coverage
         run: |
-          sonar-scanner \
-            -Dsonar.projectKey=cantor11_skyshield-test \
-            -Dsonar.organization=cantor11 \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.sources=./src \
-            -Dsonar.language=js \
-            -Dsonar.exclusions=node_modules/** \
-            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
+          npx jest --coverage # Genera el archivo coverage/lcov.info.
+          echo "Coverage report generated"
+
+      # 5. Validar que el reporte de cobertura existe
+      - name: Verify coverage report
+        run: |
+          if [ ! -f ./coverage/lcov.info ]; then
+            echo "Coverage report not found!"
+            exit 1
+          fi
+
+      # 6. Ejecutar SonarCloud Scan
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONARCLOUD_HOST_URL }}
+        with:
+          projectBaseDir: .
