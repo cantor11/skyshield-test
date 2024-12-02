@@ -1,0 +1,7 @@
+organization=cantor11
+projectKey=cantor11_skyshield-test
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.58190
+dashboardUrl=https://sonarcloud.io/dashboard?id=cantor11_skyshield-test
+ceTaskId=AZOFGahXDWWbIoRSwEJQ
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZOFGahXDWWbIoRSwEJQ
