@@ -36,7 +36,13 @@ This project aims to develop a collaborative and interactive 3D web page designe
 - Deployment: Global in versel and local in kubernetes with docker.
 
 ### Tests
-
+To view test results in GitHub Actions, go to the Actions tab of the repository, select the workflow that ran the tests, and then click the corresponding job. Within the job logs, you will be able to see the results of the tests, indicating whether they passed or failed.
 
 ### Deployment
+The Dockerfile creates an image to build and serve a web application. First, use Node.js to install the dependencies and build the application. Then, it uses Nginx to serve the static files generated in the build. The container exposes port 80 to access the application.
 
+To use this Dockerfile, follow these steps:
+
+- Build the image: Run docker build -t my-app . in the terminal from the project directory to create the Docker image.
+- Run the container: Use docker run -p 80:80 my-app to run the container and expose the application on port 80.
+- Access the application: Open a browser and go to http://localhost to see the application served by Nginx.
