@@ -48,3 +48,10 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
           SONAR_HOST_URL: ${{ vars.SONARCLOUD_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=cantor11_skyshield-test
+            -Dsonar.organization=cantor11
+            -Dsonar.language=js
+            -Dsonar.sources=./src
+            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
