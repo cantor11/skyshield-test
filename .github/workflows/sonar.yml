@@ -1,0 +1,53 @@
+name: SonarCloud Analysis
+
+on:
+  push:
+    branches:
+      - main # Ejecuta el análisis en cada push a la rama 'main'.
+  pull_request:
+    branches:
+      - main # Ejecuta el análisis en los pull requests hacia 'main'.
+
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Descargar el código fuente
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Configurar Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 # Asegura que se use la versión adecuada de Node.js.
+
+      # 3. Configurar Java
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11' # Sonar Scanner requiere Java.
+
+      # 4. Instalar dependencias del proyecto
+      - name: Install dependencies
+        run: npm install
+
+      # 5. Generar reporte de cobertura con Jest
+      - name: Run Jest with coverage
+        run: npx jest --coverage # Genera el archivo coverage/lcov.info.
+
+      # 6. Ejecutar Sonar Scanner
+
+      - name: Run Sonar Scanner
+        env:
+          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }} # Asegúrate de configurar este secreto en GitHub.
+        run: |
+          sonar-scanner \
+            -Dsonar.projectKey=cantor11_skyshield-test \
+            -Dsonar.organization=cantor11 \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.sources=./src \
+            -Dsonar.language=js \
+            -Dsonar.exclusions=node_modules/** \
+            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
