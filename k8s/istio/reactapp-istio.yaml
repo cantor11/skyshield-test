@@ -1,0 +1,51 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: reactapp-gateway
+  namespace: devopslab
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: reactapp
+  namespace: devopslab
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - reactapp-gateway
+  http:
+  - route:
+    - destination:
+        host: reactapp
+        subset: version1
+      weight: 50
+    - destination:
+        host: reactapp
+        subset: version2
+      weight: 50
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: reactapp
+  namespace: devopslab
+spec:
+  host: reactapp
+  subsets:
+  - name: version1
+    labels:
+      version: "0.0.1"
+  - name: version2
+    labels:
+      version: "0.0.2"

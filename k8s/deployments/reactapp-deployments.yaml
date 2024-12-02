@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reactapp
+  namespace: devopslab
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: reactapp
+  template:
+    metadata:
+      labels:
+        app: reactapp
+        version: "0.0.1"
+    spec:
+      containers:
+      - name: reactapp
+        image: david4562/mi-react-app:0.0.1
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reactapp-canary
+  namespace: devopslab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reactapp
+  template:
+    metadata:
+      labels:
+        app: reactapp
+        version: "0.0.2"
+    spec:
+      containers:
+      - name: reactapp
+        image: david4562/mi-react-app:0.0.2
+        ports:
+        - containerPort: 80
