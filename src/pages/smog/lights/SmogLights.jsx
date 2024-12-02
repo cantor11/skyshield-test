@@ -1,3 +1,5 @@
+import React from 'react';
+
 /**
  * Lights component defines the lighting setup for the 3D scene.
  * It adds ambient light and point ligth to the scene to provide basic illumination.
