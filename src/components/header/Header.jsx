@@ -56,14 +56,6 @@ const Header = () => {
               Capa de ozono
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/quiz"
-              className={({ isActive }) => isActive ? "button-link active" : "button-link"}
-            >
-              Quiz
-            </NavLink>
-          </li>
         </ul>
       </nav>
       <div className="right-section">

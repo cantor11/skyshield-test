@@ -1,0 +1,52 @@
+name: SonarCloud Analysis
+
+on:
+  push:
+    branches:
+      - main # Ejecuta el análisis en cada push a la rama 'main'.
+  pull_request:
+    branches:
+      - main # Ejecuta el análisis en los pull requests hacia 'main'.
+
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    environment: ci
+
+    steps:
+      # 1. Descargar el código fuente
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Configurar Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 # Asegura que se use la versión adecuada de Node.js.
+
+      # 3. Instalar dependencias del proyecto
+      - name: Install dependencies
+        run: npm ci # Usa 'npm ci' para instalaciones más confiables en CI/CD.
+
+      # 4. Generar reporte de cobertura con Jest
+      - name: Run tests with coverage
+        run: |
+          npx jest --coverage # Genera el archivo coverage/lcov.info.
+          echo "Coverage report generated"
+
+      # 5. Validar que el reporte de cobertura existe
+      - name: Verify coverage report
+        run: |
+          if [ ! -f ./coverage/lcov.info ]; then
+            echo "Coverage report not found!"
+            exit 1
+          fi
+
+      # 6. Ejecutar SonarCloud Scan
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONARCLOUD_HOST_URL }}
+        with:
+          projectBaseDir: .
