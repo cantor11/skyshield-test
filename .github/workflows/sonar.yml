@@ -11,7 +11,7 @@ on:
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
-    environment: ci
+
     steps:
       # 1. Descargar el código fuente
       - name: Checkout code
@@ -25,23 +25,32 @@ jobs:
 
       # 3. Instalar dependencias del proyecto
       - name: Install dependencies
-        run: npm install
+        run: npm ci # Usa 'npm ci' para instalaciones más confiables en CI/CD.
 
       # 4. Generar reporte de cobertura con Jest
-      - name: Run Jest with coverage
-        run: npx jest --coverage # Genera el archivo coverage/lcov.info.
+      - name: Run tests with coverage
+        run: |
+          npx jest --coverage # Genera el archivo coverage/lcov.info.
+          echo "Coverage report generated"
 
-      # 5. Ejecutar Sonar Scanner
+      # 5. Validar que el reporte de cobertura existe
+      - name: Verify coverage report
+        run: |
+          if [ ! -f ./coverage/lcov.info ]; then
+            echo "Coverage report not found!"
+            exit 1
+          fi
+
+      # 6. Ejecutar SonarCloud Scan
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
-        env:
-          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
         with:
           args: >
             -Dsonar.projectKey=cantor11_skyshield-test
             -Dsonar.organization=cantor11
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.sources=./src
-            -Dsonar.language=js
-            -Dsonar.exclusions=node_modules/**
+            -Dsonar.exclusions=**/node_modules/**,**/dist/**
             -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
+        env:
+          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
