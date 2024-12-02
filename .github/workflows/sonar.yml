@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '11' # Sonar Scanner requiere Java.
-          distribution: 'adoptium'
+          distribution: 'zulu'
 
       # 4. Instalar dependencias del proyecto
       - name: Install dependencies
