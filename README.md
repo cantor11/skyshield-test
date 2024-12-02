@@ -3,13 +3,12 @@
 
 ### Authors
 
-Junior Cantor Arévalo - 2224949 
-Cristian Cabrera Pantoja - 2226285
-Néstor Heredia - 2058558
-Juan Guerrero - 2040798
-Jhonnier Hernández - 2140113
-Oscar Cuaical - 2270657
-Kevin Jordan Alzate - 2228507
+- Junior Cantor Arévalo - 2224949 
+- Cristian Cabrera Pantoja - 2226285
+- Néstor Heredia - 2058558
+- Juan Guerrero - 2040798
+- Oscar Cuaical - 2270657
+- Kevin Jordan Alzate - 2228507
 
 ### Introduction
 This project aims to develop a collaborative and interactive 3D web page designed to raise awareness and educate users about environmental issues related to air. Through an immersive experience, users will learn about the causes, impacts, and solutions to problems such as the: 
